@@ -1,0 +1,147 @@
+/*
+Develop a program in C++ to create a database of student’s information system containing the following information: Name, Roll number, Class, Division, Date of Birth, Blood group, Contact address, Telephone number, Driving license no. and other. Construct the database with suitable member functions. Make use of constructor, default constructor, copy constructor,
+ destructor, static member functions, friend class, exception handling.
+
+
+ Theory:
+ Constructor:
+ A special method of the class that will be automatically invoked when an instance of the class is
+ created  is  called  as  constructor.  Following  are  the
+ most useful features of constructor.
+ 1) Constructor is used for Initializing the values to the data members of the Class.
+ 2) Constructor is that whose name is same as name of class.
+ 3) Constructor gets Automatically called when an object of class is created.
+ 4) Constructors never have a Return Type even void.
+ 5) Constructor is of Default, Parameterized and Copy 
+Constructors. The various types of Constructor are as follows:
+Constructors can be classified into 3 types
+ 1. Default Constructor
+ 2. Parameterized Constructor
+ 3. Copy Constructor
+
+ Static members
+ A class can contain static members, either data or functions.
+ Static data members of a class are also known as "class variables", because there is only one unique
+ value for all the objects of that same class
+
+friend function
+A friend function is a function that isn't a member of a class but has access to the class's private and protected members. Friend functions aren't considered class members.
+Pointers:
+ A pointer is a derived data type that refers to another data variable by storing the variables memory
+ address rather than data.
+ Declaration of pointer variable is in the following form :
+ Data_type * ptr_var;
+
+*/
+
+
+
+#include <iostream> 
+#include <string.h> 
+#include <stdlib.h> 
+using namespace std; 
+ 
+class Student { 
+    int roll; 
+    char name[15]; 
+    char address[25]; 
+    char class_name[12]; 
+    char dob[12]; 
+    char licno[15]; 
+    char blood_gr[3]; 
+    char mobile_no[12]; 
+ 
+public: 
+    // Constructor 
+    Student() { 
+        roll = 0; 
+        strcpy(name, ""); 
+        strcpy(address, ""); 
+        strcpy(class_name, ""); 
+        strcpy(dob, ""); 
+        strcpy(licno, ""); 
+        strcpy(blood_gr, ""); 
+        strcpy(mobile_no, ""); 
+    } 
+ 
+    // Parameterized constructor 
+    Student(int roll, const char* name, const char* address, const char* class_name, const char* 
+dob, const char* licno, const char* blood_gr, const char* mobile_no) { 
+        this->roll = roll; 
+        strcpy(this->name, name); 
+        strcpy(this->address, address); 
+        strcpy(this->class_name, class_name); 
+        strcpy(this->dob, dob); 
+        strcpy(this->licno, licno); 
+        strcpy(this->blood_gr, blood_gr); 
+        strcpy(this->mobile_no, mobile_no); 
+    } 
+ 
+    // Function to accept student details 
+    void accept() { 
+        cout << "\nEnter roll number: "; 
+        cin >> roll; 
+        cout << "Enter name: "; 
+        cin.ignore();  
+        cin.getline(name, 15); 
+        cout << "Enter address: "; 
+        cin.getline(address, 25); 
+        cout << "Enter class name: "; 
+        cin.getline(class_name, 12); 
+        cout << "Enter DOB (dd/mm/yyyy): "; 
+        cin.getline(dob, 12); 
+        cout << "Enter license number: "; 
+        cin.getline(licno, 15); 
+        cout << "Enter blood group: "; 
+        cin.getline(blood_gr, 3); 
+        cout << "Enter mobile number: "; 
+        cin.getline(mobile_no, 12); 
+    } 
+ 
+    // Function to display student details 
+    void display() const { 
+        cout << "\nRoll: " << roll; 
+        cout << "\nName: " << name; 
+        cout << "\nAddress: " << address; 
+        cout << "\nClass: " << class_name; 
+        cout << "\nDOB: " << dob; 
+        cout << "\nLicense No: " << licno; 
+        cout << "\nBlood Group: " << blood_gr; 
+        cout << "\nMobile No: " << mobile_no << endl; 
+    } 
+}; 
+ 
+int main() { 
+    int ch, n; 
+    Student students[20];  // Array to store student records 
+ 
+    while (true) { 
+        cout << "\nMenu\n1. Accept Student Details\n2. Display All Students\n3. Exit\nEnter Choice: "; 
+        cin >> ch; 
+        switch (ch) { 
+            case 1: 
+                cout << "Enter number of students: "; 
+                cin >> n; 
+                for (int i = 0; i < n; i++) { 
+                    cout << "\nEntering details for Student " << (i + 1) << ":\n"; 
+                    students[i].accept(); 
+                } 
+                break; 
+ 
+            case 2: 
+                for (int i = 0; i < n; i++) { 
+                    cout << "\nDisplaying details of Student " << (i + 1) << ":\n"; 
+                    students[i].display(); 
+                } 
+                break; 
+ 
+            case 3: 
+                exit(0); 
+ 
+            default: 
+                cout << "\nInvalid choice. Please try again."; 
+        } 
+    } 
+ 
+    return 0; 
+} 
